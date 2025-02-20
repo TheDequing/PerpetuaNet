@@ -1,6 +1,7 @@
+// ViewModels/SyncViewModel.cs
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using WebRTCNET; // Note o namespace correto: WebRTCNET, não WebRtc
+using WebRTCNET;
 
 namespace PerpetuaNet.ViewModels;
 
@@ -12,17 +13,14 @@ public partial class SyncViewModel : ObservableObject
     [RelayCommand]
     private void ForceSync()
     {
-        var localPeer = new PeerConnection();
-        var remotePeer = new PeerConnection(); // Simulação
-        var channel = localPeer.CreateDataChannel("syncChannel");
-
-        localPeer.OnIceCandidate += (candidate) => SyncStatus = $"Candidato: {candidate}";
+        var peer = new PeerConnection();
+        var channel = peer.CreateDataChannel("syncChannel");
         channel.OnOpen += () =>
         {
             channel.Send("Sincronização iniciada!");
             SyncStatus = "Canal P2P aberto!";
         };
         channel.OnMessage += (data) => SyncStatus = $"Recebido: {data}";
-        localPeer.CreateOffer();
+        peer.CreateOffer();
     }
 }

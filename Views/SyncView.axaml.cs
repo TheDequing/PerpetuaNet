@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 
 namespace PerpetuaNet.Views;
+
 public partial class SyncView : UserControl
 {
     public SyncView()

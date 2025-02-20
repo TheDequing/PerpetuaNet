@@ -8,9 +8,10 @@
 	<ItemGroup>
 		<PackageReference Include="Avalonia" Version="11.2.1" />
 		<PackageReference Include="Avalonia.Controls.DataGrid" Version="11.2.1" />
-		<PackageReference Include="Avalonia.Diagnostics" Version="11.2.1" />
+		<PackageReference Include="Avalonia.Desktop" Version="11.2.1" />
+		<PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-		<PackageReference Include="MonoTorrent" Version="3.0.2" />
-		<PackageReference Include="WebRTC.NET" Version="1.75.0.1-Alpha" />
+		<PackageReference Include="WebRTCNET" Version="1.75.0.1-Alpha" />
+		<PackageReference Include="MonoTorrent" Version="2.0.7" />
 	</ItemGroup>
 </Project>

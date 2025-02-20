@@ -1,8 +1,0 @@
-C:\PerpetuaNet\obj\Debug\net9.0\PerpetuaNet.csproj.AssemblyReference.cache
-C:\PerpetuaNet\obj\Debug\net9.0\Avalonia\Resources.Inputs.cache
-C:\PerpetuaNet\obj\Debug\net9.0\Avalonia\resources
-C:\PerpetuaNet\obj\Debug\net9.0\PerpetuaNet.GeneratedMSBuildEditorConfig.editorconfig
-C:\PerpetuaNet\obj\Debug\net9.0\PerpetuaNet.AssemblyInfoInputs.cache
-C:\PerpetuaNet\obj\Debug\net9.0\PerpetuaNet.AssemblyInfo.cs
-C:\PerpetuaNet\obj\Debug\net9.0\PerpetuaNet.csproj.CoreCompileInputs.cache
-C:\PerpetuaNet\obj\Debug\net9.0\PerpetuaNet.sourcelink.json
