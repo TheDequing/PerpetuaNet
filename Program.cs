@@ -1,46 +1,21 @@
-﻿using System;
-using System.Threading;
-using Avalonia;
-using PerpetuaNet.Services;
+﻿using Avalonia;
+using System;
 
-namespace PerpetuaNet
+namespace PerpetuaNet;
+
+sealed class Program
 {
-    class Program
-    {
-        [STAThread]
-        public static void Main(string[] args)
-        {
-            try
-            {
-                Logger.Log("[DEBUG] Inicializando PerpetuaNet...");
-                Thread.Sleep(2000);
+    // Initialization code. Don't use any Avalonia, third-party APIs or any
+    // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
+    // yet and stuff might break.
+    [STAThread]
+    public static void Main(string[] args) => BuildAvaloniaApp()
+        .StartWithClassicDesktopLifetime(args);
 
-                var dbHelper = new DatabaseHelper();
-                // Evitar duplicação: verifica se o usuário já existe
-                if (!dbHelper.ValidateUser("admin", "12345"))
-                {
-                    dbHelper.AddUser("admin", "12345");
-                    Logger.Log("[DEBUG] Usuário de teste criado.");
-                }
-                else
-                {
-                    Logger.Log("[DEBUG] Usuário de teste já existe.");
-                }
-
-                BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
-                Logger.Log("[DEBUG] PerpetuaNet carregado com sucesso.");
-            }
-            catch (Exception ex)
-            {
-                Logger.Log($"[ERRO CRÍTICO] O programa fechou inesperadamente: {ex.Message}");
-            }
-            // Não utilizamos Console.ReadKey() para evitar exceção em aplicativos GUI
-        }
-
-        public static AppBuilder BuildAvaloniaApp()
-            => AppBuilder.Configure<App>()
-                .UsePlatformDetect()
-                .WithInterFont()
-                .LogToTrace();
-    }
+    // Avalonia configuration, don't remove; also used by visual designer.
+    public static AppBuilder BuildAvaloniaApp()
+        => AppBuilder.Configure<App>()
+            .UsePlatformDetect()
+            .WithInterFont()
+            .LogToTrace();
 }

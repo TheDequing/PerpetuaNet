@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\PROJETOS\\PerpetuaNet\\PerpetuaNet.csproj": {}
+    "C:\\PerpetuaNet\\PerpetuaNet\\PerpetuaNet.csproj": {}
   },
   "projects": {
-    "C:\\PROJETOS\\PerpetuaNet\\PerpetuaNet.csproj": {
+    "C:\\PerpetuaNet\\PerpetuaNet\\PerpetuaNet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\PROJETOS\\PerpetuaNet\\PerpetuaNet.csproj",
+        "projectUniqueName": "C:\\PerpetuaNet\\PerpetuaNet\\PerpetuaNet.csproj",
         "projectName": "PerpetuaNet",
-        "projectPath": "C:\\PROJETOS\\PerpetuaNet\\PerpetuaNet.csproj",
+        "projectPath": "C:\\PerpetuaNet\\PerpetuaNet\\PerpetuaNet.csproj",
         "packagesPath": "C:\\Users\\rakjs\\.nuget\\packages\\",
-        "outputPath": "C:\\PROJETOS\\PerpetuaNet\\obj\\",
+        "outputPath": "C:\\PerpetuaNet\\PerpetuaNet\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -71,21 +71,9 @@
               "target": "Package",
               "version": "[11.2.1, )"
             },
-            "BCrypt.Net-Next": {
+            "CommunityToolkit.Mvvm": {
               "target": "Package",
-              "version": "[4.0.3, )"
-            },
-            "Microsoft.Data.Sqlite": {
-              "target": "Package",
-              "version": "[9.0.2, )"
-            },
-            "SIPSorcery": {
-              "target": "Package",
-              "version": "[8.0.9, )"
-            },
-            "SQLitePCLRaw.bundle_e_sqlcipher": {
-              "target": "Package",
-              "version": "[2.1.10, )"
+              "version": "[8.2.1, )"
             }
           },
           "imports": [
