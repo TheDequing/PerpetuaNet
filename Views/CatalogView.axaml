@@ -1,0 +1,11 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:PerpetuaNet.ViewModels"
+             x:Class="PerpetuaNet.Views.CatalogView">
+	<UserControl.DataContext>
+		<vm:CatalogViewModel/>
+	</UserControl.DataContext>
+	<Grid>
+		<TextBlock Text="Página do Catálogo" FontSize="24" Foreground="White" HorizontalAlignment="Center" />
+	</Grid>
+</UserControl>

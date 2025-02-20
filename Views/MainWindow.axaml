@@ -1,0 +1,61 @@
+<Window x:Class="PerpetuaNet.Views.MainWindow"
+        xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:PerpetuaNet.ViewModels"
+        xmlns:views="clr-namespace:PerpetuaNet.Views"
+        x:DataType="vm:MainWindowViewModel"
+        Title="PerpetuaNet"
+        Width="1024" Height="768"
+        Background="#121212">
+<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<!-- Linha superior: Botões de navegação -->
+		<StackPanel Orientation="Horizontal" Background="#1E1E1E" Margin="10" Spacing="5" Grid.Row="0">
+			<Button Content="Início" Command="{Binding ShowInicioCommand}" IsEnabled="True"/>
+			<Button Content="Biblioteca" Command="{Binding ShowBibliotecaCommand}" IsEnabled="True"/>
+			<Button Content="Jogos" Command="{Binding ShowJogosCommand}" IsEnabled="True"/>
+			<Button Content="Filmes" Command="{Binding ShowFilmesCommand}" IsEnabled="True"/>
+			<Button Content="Séries" Command="{Binding ShowSeriesCommand}" IsEnabled="True"/>
+			<Button Content="Animes" Command="{Binding ShowAnimesCommand}" IsEnabled="True"/>
+			<Button Content="Configurações" Command="{Binding ShowConfiguracoesCommand}" IsEnabled="True"/>
+			<Button Content="Downloads" Command="{Binding ShowDownloadsCommand}" IsEnabled="True"/>
+			<Button Content="Login" Command="{Binding ShowLoginCommand}" IsVisible="{Binding IsNotLoggedIn}" IsEnabled="True"/>
+			<Button Content="Logout" Command="{Binding LogOutCommand}" IsVisible="{Binding IsLoggedIn}" IsEnabled="True"/>
+		</StackPanel>
+
+		<!-- Linha inferior: Conteúdo das abas -->
+		<TabControl SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}" Grid.Row="1">
+			<TabItem Header="Início">
+				<views:InicioView/>
+			</TabItem>
+			<TabItem Header="Biblioteca">
+				<views:BibliotecaView/>
+			</TabItem>
+			<TabItem Header="Jogos">
+				<views:JogosView/>
+			</TabItem>
+			<TabItem Header="Filmes">
+				<views:FilmesView/>
+			</TabItem>
+			<TabItem Header="Séries">
+				<views:SeriesView/>
+			</TabItem>
+			<TabItem Header="Animes">
+				<views:AnimesView/>
+			</TabItem>
+			<TabItem Header="Configurações">
+				<views:ConfiguracoesView/>
+			</TabItem>
+			<TabItem Header="Downloads">
+				<views:DownloadManagerView/>
+			</TabItem>
+			<TabItem Header="Login">
+				<views:LoginView/>
+			</TabItem>
+		</TabControl>
+	</Grid>
+</Window>

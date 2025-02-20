@@ -1,0 +1,7 @@
+<UserControl x:Class="PerpetuaNet.Views.LoginView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Grid>
+    <Button Content="Clique aqui" Click="TestButton_Click"/>
+  </Grid>
+</UserControl>

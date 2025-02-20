@@ -1,0 +1,6 @@
+<Window x:Class="PerpetuaNet.Views.TestWindow"
+        xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Janela de Teste" Width="300" Height="200">
+    <Button Content="Clique aqui" Click="TestButton_Click"/>
+</Window>
