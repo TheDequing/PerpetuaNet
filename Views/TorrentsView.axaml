@@ -1,0 +1,11 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="PerpetuaNet.Views.TorrentsView"
+             xmlns:vm="using:PerpetuaNet.ViewModels"
+             x:DataType="vm:TorrentsViewModel">
+    <StackPanel Margin="10">
+        <TextBox x:Name="TorrentLink" Watermark="Insira o link do torrent" Text="{Binding TorrentLink}" />
+        <Button Content="Adicionar Torrent" Command="{Binding AddTorrentCommand}" Margin="0,5,0,0" />
+        <DataGrid ItemsSource="{Binding Torrents}" AutoGenerateColumns="True" Height="300" />
+    </StackPanel>
+</UserControl>

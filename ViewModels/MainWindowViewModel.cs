@@ -1,6 +1,28 @@
-﻿namespace PerpetuaNet.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using PerpetuaNet.Views;
 
-public partial class MainWindowViewModel : ViewModelBase
+namespace PerpetuaNet.ViewModels;
+
+public partial class MainWindowViewModel : ObservableObject
 {
-    public string Greeting { get; } = "Welcome to Avalonia!";
+    [ObservableProperty]
+    private object _currentView;
+
+    public MainWindowViewModel()
+    {
+        CurrentView = new HomeView();
+    }
+
+    [RelayCommand]
+    private void ShowHome() => CurrentView = new HomeView();
+
+    [RelayCommand]
+    private void ShowTorrents() => CurrentView = new TorrentsView();
+
+    [RelayCommand]
+    private void ShowSync() => CurrentView = new SyncView();
+
+    [RelayCommand]
+    private void ShowSettings() => CurrentView = new SettingsView();
 }
