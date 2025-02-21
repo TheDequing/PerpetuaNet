@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MonoTorrent;
 using MonoTorrent.Client;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -27,16 +28,23 @@ public partial class CatalogViewModel : ObservableObject
     [RelayCommand]
     private async Task DownloadMagnet(string link)
     {
-        if (Torrent.TryParse(link, out var torrent)) // Corrige para TryParse
+        try
         {
-            var manager = await _engine.AddAsync(torrent, "C:\\Downloads");
+            var magnet = MagnetLink.Parse(link); // Usa MagnetLink.Parse para links magnéticos
+            var manager = await _engine.AddAsync(magnet, "C:\\Downloads"); // Adiciona diretamente o MagnetLink
             await manager.StartAsync();
+            // Aqui você pode notificar a seção Downloads, se desejar
+        }
+        catch (Exception ex)
+        {
+            // Tratar erro (ex.: link inválido)
+            MagnetLinks.Add(new MagnetItem { Name = "Erro", Link = $"Falha: {ex.Message}" });
         }
     }
 }
 
 public class MagnetItem
 {
-    public string? Name { get; set; } // Torna anulável
-    public string? Link { get; set; } // Torna anulável
+    public string? Name { get; set; }
+    public string? Link { get; set; }
 }
