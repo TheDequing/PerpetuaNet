@@ -6,6 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 	<ItemGroup>
+		<AvaloniaResource Include="Assets\user-icon.png" />
 		<PackageReference Include="Avalonia" Version="11.2.1" />
 		<PackageReference Include="Avalonia.Controls.DataGrid" Version="11.2.1" />
 		<PackageReference Include="Avalonia.Desktop" Version="11.2.1" />

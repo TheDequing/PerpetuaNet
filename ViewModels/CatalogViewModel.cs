@@ -30,14 +30,12 @@ public partial class CatalogViewModel : ObservableObject
     {
         try
         {
-            var magnet = MagnetLink.Parse(link); // Usa MagnetLink.Parse para links magnéticos
-            var manager = await _engine.AddAsync(magnet, "C:\\Downloads"); // Adiciona diretamente o MagnetLink
+            var magnet = MagnetLink.Parse(link);
+            var manager = await _engine.AddAsync(magnet, "C:\\Downloads");
             await manager.StartAsync();
-            // Aqui você pode notificar a seção Downloads, se desejar
         }
         catch (Exception ex)
         {
-            // Tratar erro (ex.: link inválido)
             MagnetLinks.Add(new MagnetItem { Name = "Erro", Link = $"Falha: {ex.Message}" });
         }
     }
