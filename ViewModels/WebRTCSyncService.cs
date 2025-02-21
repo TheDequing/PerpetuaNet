@@ -1,9 +1,7 @@
 using SIPSorcery.Net;
-using System;
 using System.Diagnostics;
 using System.Net.WebSockets;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace PerpetuaNet;
@@ -32,7 +30,7 @@ public class WebRTCSyncService
             };
 
             _ws = new ClientWebSocket();
-            await _ws.ConnectAsync(new Uri("ws://localhost:5000/ws"), CancellationToken.None);
+            await _ws.ConnectAsync(new Uri("wss://perpetuanetserver.onrender.com/ws"), CancellationToken.None); // Use wss://
             Debug.WriteLine("WebRTC: Conectado ao WebSocket");
 
             _pc.onicecandidate += async (candidate) =>
@@ -45,7 +43,9 @@ public class WebRTCSyncService
             Debug.WriteLine("WebRTC: Oferta criada e configurada localmente");
 
             var offerJson = System.Text.Json.JsonSerializer.Serialize(offer);
+#pragma warning disable CS4014 // Suprimir aviso
             await _ws.SendAsync(Encoding.UTF8.GetBytes(offerJson), WebSocketMessageType.Text, true, CancellationToken.None);
+#pragma warning restore CS4014
             Debug.WriteLine("WebRTC: Oferta enviada ao servidor de sinalização");
 
             var buffer = new byte[1024];
