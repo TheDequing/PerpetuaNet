@@ -1,0 +1,5 @@
+<UserControl x:Class="PerpetuaNet.Views.DownloadsView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <TextBlock Text="Seção Downloads" HorizontalAlignment="Center" VerticalAlignment="Center" />
+</UserControl>

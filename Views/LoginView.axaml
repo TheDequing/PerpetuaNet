@@ -1,0 +1,9 @@
+<UserControl x:Class="PerpetuaNet.Views.LoginView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBox Watermark="Usuário" Margin="0,0,0,10" />
+        <TextBox Watermark="Senha" PasswordChar="*" />
+        <Button Content="Entrar" HorizontalAlignment="Center" Margin="0,10,0,0" />
+    </StackPanel>
+</UserControl>

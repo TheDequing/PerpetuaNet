@@ -6,10 +6,15 @@
         Title="PerpetuaNet" Width="800" Height="600">
 	<Grid>
 		<StackPanel Orientation="Horizontal" Margin="10">
-			<Button Content="Home" Command="{Binding ShowHomeCommand}" Margin="5" />
-			<Button Content="Torrents" Command="{Binding ShowTorrentsCommand}" Margin="5" />
-			<Button Content="Sincronizar" Command="{Binding ShowSyncCommand}" Margin="5" />
-			<Button Content="Configurações" Command="{Binding ShowSettingsCommand}" Margin="5" />
+			<Button Content="Início" Command="{Binding ShowHomeCommand}" Margin="5" />
+			<Button Content="Catálogo" Command="{Binding ShowCatalogCommand}" Margin="5" />
+			<Button Content="Downloads" Command="{Binding ShowDownloadsCommand}" Margin="5" />
+			<Button Content="Ajustes" Command="{Binding ShowSettingsCommand}" Margin="5" />
+			<Button Content="Biblioteca" Command="{Binding ShowLibraryCommand}" Margin="5" />
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<Image Source="/Assets/user-icon.png" Width="20" Height="20" />
+				<Button Content="Entrar" Command="{Binding ShowLoginCommand}" Margin="2,0,0,0" />
+			</StackPanel>
 		</StackPanel>
 		<ContentControl x:Name="MainContent" Margin="10,50,10,10" Content="{Binding CurrentView}" />
 	</Grid>

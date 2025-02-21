@@ -1,0 +1,19 @@
+<UserControl x:Class="PerpetuaNet.Views.CatalogView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PerpetuaNet.ViewModels"
+             x:DataType="vm:CatalogViewModel">
+    <StackPanel Margin="10">
+        <TextBlock Text="Catálogo de Downloads" FontSize="20" Margin="0,0,0,10" />
+        <ItemsControl ItemsSource="{Binding MagnetLinks}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="{Binding Name}" Width="200" />
+                        <Button Content="Baixar" Command="{Binding DataContext.DownloadMagnetCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding Link}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+</UserControl>
