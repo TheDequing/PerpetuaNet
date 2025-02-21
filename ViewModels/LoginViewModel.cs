@@ -6,13 +6,13 @@ namespace PerpetuaNet.ViewModels;
 public partial class LoginViewModel : ObservableObject
 {
     [ObservableProperty]
-    private string _username;
+    private string? _username; // Tornar anulável com ?
 
     private readonly MainWindowViewModel _mainViewModel;
 
     public LoginViewModel()
     {
-        _mainViewModel = new MainWindowViewModel(); // Pode precisar de injeção de dependência melhor
+        _mainViewModel = new MainWindowViewModel();
     }
 
     [RelayCommand]
@@ -27,8 +27,6 @@ public partial class LoginViewModel : ObservableObject
     [RelayCommand]
     private void Register()
     {
-        // Lógica de registro (ex.: abrir uma tela ou salvar usuário)
-        // Por enquanto, apenas um placeholder
         System.Diagnostics.Debug.WriteLine($"Registro solicitado para: {Username}");
     }
 }
