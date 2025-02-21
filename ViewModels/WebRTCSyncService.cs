@@ -11,21 +11,26 @@ public class WebRTCSyncService
 {
     private RTCPeerConnection? _pc;
     private ClientWebSocket? _ws;
-    private readonly string _logFile = "C:\\PerpetuaNet\\logs.txt"; // Caminho do arquivo de log
+    private readonly string _logFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs.txt");
 
     public async Task InitializeAndSync()
     {
+        Log("Iniciando sincronização WebRTC...");
         try
         {
-            Log("Iniciando sincronização WebRTC...");
+            Log("Configurando RTCConfiguration com STUN...");
             var config = new RTCConfiguration
             {
                 iceServers = new List<RTCIceServer>
-                {
-                    new RTCIceServer { urls = "stun:stun.l.google.com:19302" } // STUN do Google
-                }
+            {
+                new RTCIceServer { urls = "stun:stun.l.google.com:19302" }
+            }
             };
+
+            Log("Criando RTCPeerConnection...");
             _pc = new RTCPeerConnection(config);
+
+            Log("Criando canal de dados...");
             var channel = await _pc.createDataChannel("syncChannel");
 
             channel.onopen += () =>
@@ -38,23 +43,46 @@ public class WebRTCSyncService
                 Log($"WebRTC: Recebido: {Encoding.UTF8.GetString(data)}");
             };
 
+            Log("Inicializando ClientWebSocket...");
             _ws = new ClientWebSocket();
-            await _ws.ConnectAsync(new Uri("wss://perpetuanetserver.onrender.com/ws"), CancellationToken.None);
-            Log("WebRTC: Conectado ao WebSocket");
+
+            Log("Conectando ao WebSocket wss://perpetuanetserver.onrender.com/ws...");
+            using (var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10))) // Timeout de 10 segundos
+            {
+                try
+                {
+                    await _ws.ConnectAsync(new Uri("wss://perpetuanetserver.onrender.com/ws"), cts.Token);
+                    Log("WebRTC: Conectado ao WebSocket");
+                }
+                catch (OperationCanceledException)
+                {
+                    Log("Erro: Timeout ao conectar ao WebSocket");
+                    return;
+                }
+                catch (WebSocketException wex)
+                {
+                    Log($"Erro ao conectar ao WebSocket: {wex.Message}");
+                    return;
+                }
+            }
 
             _pc.onicecandidate += async (candidate) =>
             {
                 await SendIceCandidateAsync(candidate);
             };
 
+            Log("Criando oferta...");
             var offer = _pc.createOffer();
+            Log("Configurando descrição local...");
             _pc.setLocalDescription(offer);
             Log("WebRTC: Oferta criada e configurada localmente");
 
             var offerJson = System.Text.Json.JsonSerializer.Serialize(offer);
+            Log("Enviando oferta ao servidor...");
             await _ws.SendAsync(Encoding.UTF8.GetBytes(offerJson), WebSocketMessageType.Text, true, CancellationToken.None);
             Log("WebRTC: Oferta enviada ao servidor de sinalização");
 
+            Log("Aguardando resposta do servidor...");
             var buffer = new byte[1024];
             var result = await _ws.ReceiveAsync(buffer, CancellationToken.None);
             var answerJson = Encoding.UTF8.GetString(buffer, 0, result.Count);
@@ -70,13 +98,13 @@ public class WebRTCSyncService
                 Log("Erro: Não foi possível desserializar a resposta");
                 return;
             }
+            Log("Configurando descrição remota...");
             _pc.setRemoteDescription(answer);
             Log("WebRTC: Resposta recebida e configurada");
         }
         catch (Exception ex)
         {
-            Log($"Erro na inicialização do WebRTC: {ex.Message}");
-            throw;
+            Log($"Erro na inicialização do WebRTC: {ex.Message}\nStackTrace: {ex.StackTrace}");
         }
     }
 
