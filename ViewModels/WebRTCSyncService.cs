@@ -16,7 +16,14 @@ public class WebRTCSyncService
         try
         {
             Debug.WriteLine("Iniciando sincronização WebRTC...");
-            _pc = new RTCPeerConnection();
+            var config = new RTCConfiguration
+            {
+                iceServers = new List<RTCIceServer>
+                {
+                    new RTCIceServer { urls = "stun:stun.l.google.com:19302" }
+                }
+            };
+            _pc = new RTCPeerConnection(config);
             var channel = await _pc.createDataChannel("syncChannel");
 
             channel.onopen += () =>
@@ -30,7 +37,7 @@ public class WebRTCSyncService
             };
 
             _ws = new ClientWebSocket();
-            await _ws.ConnectAsync(new Uri("wss://perpetuanetserver.onrender.com/ws"), CancellationToken.None); // Use wss://
+            await _ws.ConnectAsync(new Uri("wss://perpetuanetserver.onrender.com/ws"), CancellationToken.None);
             Debug.WriteLine("WebRTC: Conectado ao WebSocket");
 
             _pc.onicecandidate += async (candidate) =>
@@ -43,9 +50,7 @@ public class WebRTCSyncService
             Debug.WriteLine("WebRTC: Oferta criada e configurada localmente");
 
             var offerJson = System.Text.Json.JsonSerializer.Serialize(offer);
-#pragma warning disable CS4014 // Suprimir aviso
             await _ws.SendAsync(Encoding.UTF8.GetBytes(offerJson), WebSocketMessageType.Text, true, CancellationToken.None);
-#pragma warning restore CS4014
             Debug.WriteLine("WebRTC: Oferta enviada ao servidor de sinalização");
 
             var buffer = new byte[1024];
