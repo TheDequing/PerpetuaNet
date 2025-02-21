@@ -72,18 +72,71 @@ public class WebRTCSyncService
                 await SendIceCandidateAsync(candidate);
             };
 
-            Log("Criando oferta...");
-            var offer = _pc.createOffer();
-            Log("Configurando descrição local...");
-            await _pc.setLocalDescription(offer); // Este método ainda retorna Task
-            Log("WebRTC: Oferta criada e configurada localmente");
+            // Tenta receber uma oferta primeiro
+            RTCSessionDescriptionInit? remoteOffer = null;
+            Log("Verificando se há oferta remota...");
+            while (_ws.State == WebSocketState.Open && remoteOffer == null)
+            {
+                var buffer = new byte[1024];
+                var result = await _ws.ReceiveAsync(buffer, CancellationToken.None);
+                var messageJson = Encoding.UTF8.GetString(buffer, 0, result.Count);
+                Log($"WebRTC: Mensagem recebida do servidor: {messageJson}");
 
-            var offerJson = System.Text.Json.JsonSerializer.Serialize(offer);
-            Log("Enviando oferta ao servidor...");
-            await _ws.SendAsync(Encoding.UTF8.GetBytes(offerJson), WebSocketMessageType.Text, true, CancellationToken.None);
-            Log("WebRTC: Oferta enviada ao servidor de sinalização");
+                if (messageJson.Contains("\"type\":1") && messageJson.Contains("\"sdp\":"))
+                {
+                    remoteOffer = System.Text.Json.JsonSerializer.Deserialize<RTCSessionDescriptionInit>(messageJson);
+                    if (remoteOffer?.sdp != null)
+                    {
+                        Log("Oferta remota recebida, configurando descrição remota...");
+                        var setResult = _pc.setRemoteDescription(remoteOffer);
+                        if (setResult == SetDescriptionResultEnum.OK)
+                        {
+                            Log("WebRTC: Oferta remota configurada");
+                            break;
+                        }
+                        else
+                        {
+                            Log($"Erro ao configurar oferta remota: {setResult}");
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    Log("Mensagem ignorada: não é uma oferta válida");
+                }
+            }
 
-            Log("Aguardando resposta do servidor...");
+            if (remoteOffer == null)
+            {
+                // Se não recebeu oferta, cria e envia uma
+                Log("Nenhuma oferta recebida, criando oferta local...");
+                var offer = _pc.createOffer();
+                Log("Configurando descrição local...");
+                await _pc.setLocalDescription(offer);
+                Log("WebRTC: Oferta criada e configurada localmente");
+
+                var offerJson = System.Text.Json.JsonSerializer.Serialize(offer);
+                Log("Enviando oferta ao servidor...");
+                await _ws.SendAsync(Encoding.UTF8.GetBytes(offerJson), WebSocketMessageType.Text, true, CancellationToken.None);
+                Log("WebRTC: Oferta enviada ao servidor de sinalização");
+            }
+            else
+            {
+                // Se recebeu oferta, cria e envia uma resposta
+                Log("Criando resposta para a oferta remota...");
+                var answer = _pc.createAnswer();
+                Log("Configurando descrição local com resposta...");
+                await _pc.setLocalDescription(answer);
+                Log("WebRTC: Resposta criada e configurada localmente");
+
+                var answerJson = System.Text.Json.JsonSerializer.Serialize(answer);
+                Log("Enviando resposta ao servidor...");
+                await _ws.SendAsync(Encoding.UTF8.GetBytes(answerJson), WebSocketMessageType.Text, true, CancellationToken.None);
+                Log("WebRTC: Resposta enviada ao servidor de sinalização");
+            }
+
+            Log("Aguardando conexão ou resposta adicional...");
             while (_ws.State == WebSocketState.Open)
             {
                 var buffer = new byte[1024];
@@ -91,22 +144,21 @@ public class WebRTCSyncService
                 var answerJson = Encoding.UTF8.GetString(buffer, 0, result.Count);
                 Log($"WebRTC: Resposta recebida do servidor: {answerJson}");
 
-                // Filtrar apenas mensagens SDP válidas (com "type" e "sdp")
-                if (answerJson.Contains("\"type\":") && answerJson.Contains("\"sdp\":"))
+                if (answerJson.Contains("\"type\":2") && answerJson.Contains("\"sdp\":"))
                 {
                     var answer = System.Text.Json.JsonSerializer.Deserialize<RTCSessionDescriptionInit>(answerJson);
                     if (answer?.sdp != null)
                     {
-                        Log("Configurando descrição remota...");
-                        var setResult = _pc.setRemoteDescription(answer); // Método síncrono, retorna SetDescriptionResultEnum
+                        Log("Configurando descrição remota com resposta...");
+                        var setResult = _pc.setRemoteDescription(answer);
                         if (setResult == SetDescriptionResultEnum.OK)
                         {
                             Log("WebRTC: Resposta recebida e configurada");
-                            break; // Sai do loop após configurar a resposta válida
+                            break;
                         }
                         else
                         {
-                            Log($"Erro ao configurar descrição remota: {setResult}");
+                            Log($"Erro ao configurar resposta remota: {setResult}");
                         }
                     }
                     else
@@ -116,7 +168,7 @@ public class WebRTCSyncService
                 }
                 else
                 {
-                    Log("Mensagem ignorada: não é uma descrição SDP válida");
+                    Log("Mensagem ignorada: não é uma resposta válida");
                 }
             }
         }
