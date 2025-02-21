@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PerpetuaNet")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9068d00e9b02f38e578b421ee55654fb534cb276")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+72d2c2d38734719251876341597f23637f681500")]
 [assembly: System.Reflection.AssemblyProductAttribute("PerpetuaNet")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PerpetuaNet")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

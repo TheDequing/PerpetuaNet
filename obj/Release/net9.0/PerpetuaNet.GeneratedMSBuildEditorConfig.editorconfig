@@ -24,6 +24,9 @@ build_property.EnableCodeStyleSeverity =
 [C:/PerpetuaNet/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[C:/PerpetuaNet/Views/AdminView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/PerpetuaNet/Views/CatalogView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 

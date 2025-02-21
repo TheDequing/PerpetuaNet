@@ -1,9 +1,12 @@
 <UserControl x:Class="PerpetuaNet.Views.LoginView"
              xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PerpetuaNet.ViewModels"
+             x:DataType="vm:LoginViewModel">
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBox Watermark="Usuário" Margin="0,0,0,10" />
-        <TextBox Watermark="Senha" PasswordChar="*" />
-        <Button Content="Entrar" HorizontalAlignment="Center" Margin="0,10,0,0" />
+        <TextBox Watermark="Usuário" Text="{Binding Username}" Margin="0,0,0,10" />
+        <TextBox Watermark="Senha" PasswordChar="*" Margin="0,0,0,10" />
+        <Button Content="Entrar" Command="{Binding LoginCommand}" HorizontalAlignment="Center" />
+        <Button Content="Registrar" Command="{Binding RegisterCommand}" HorizontalAlignment="Center" Margin="0,10,0,0" />
     </StackPanel>
 </UserControl>

@@ -9,9 +9,13 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private object _currentView;
 
+    [ObservableProperty]
+    private bool _isAdminLoggedIn;
+
     public MainWindowViewModel()
     {
         CurrentView = new HomeView();
+        IsAdminLoggedIn = false; // Começa como não logado
     }
 
     [RelayCommand]
@@ -31,4 +35,15 @@ public partial class MainWindowViewModel : ObservableObject
 
     [RelayCommand]
     private void ShowLogin() => CurrentView = new LoginView();
+
+    [RelayCommand]
+    private void ShowAdmin() => CurrentView = new AdminView();
+
+    // Método para verificar login e liberar Admin
+    public void Login(string username)
+    {
+        // Lista de usuários autorizados (você pode expandir isso)
+        var authorizedAdmins = new List<string> { "seu_usuario", "outro_admin" };
+        IsAdminLoggedIn = authorizedAdmins.Contains(username.ToLower());
+    }
 }
