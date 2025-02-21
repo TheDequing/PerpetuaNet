@@ -10,13 +10,14 @@ namespace PerpetuaNet;
 
 public class WebRTCSyncService
 {
-    private RTCPeerConnection? _pc; // Tornar anulável
-    private ClientWebSocket? _ws;   // Tornar anulável
+    private RTCPeerConnection? _pc;
+    private ClientWebSocket? _ws;
 
     public async Task InitializeAndSync()
     {
         try
         {
+            Debug.WriteLine("Iniciando sincronização WebRTC...");
             _pc = new RTCPeerConnection();
             var channel = await _pc.createDataChannel("syncChannel");
 
@@ -32,16 +33,16 @@ public class WebRTCSyncService
 
             _ws = new ClientWebSocket();
             await _ws.ConnectAsync(new Uri("ws://localhost:5000/ws"), CancellationToken.None);
+            Debug.WriteLine("WebRTC: Conectado ao WebSocket");
 
             _pc.onicecandidate += async (candidate) =>
             {
-                var json = System.Text.Json.JsonSerializer.Serialize(candidate);
-                await _ws.SendAsync(Encoding.UTF8.GetBytes(json), WebSocketMessageType.Text, true, CancellationToken.None);
-                Debug.WriteLine($"WebRTC: Candidato ICE enviado: {json}");
+                await SendIceCandidateAsync(candidate);
             };
 
             var offer = _pc.createOffer();
-            _pc.setLocalDescription(offer); // Remover await, é síncrono
+            _pc.setLocalDescription(offer);
+            Debug.WriteLine("WebRTC: Oferta criada e configurada localmente");
 
             var offerJson = System.Text.Json.JsonSerializer.Serialize(offer);
             await _ws.SendAsync(Encoding.UTF8.GetBytes(offerJson), WebSocketMessageType.Text, true, CancellationToken.None);
@@ -51,13 +52,27 @@ public class WebRTCSyncService
             var result = await _ws.ReceiveAsync(buffer, CancellationToken.None);
             var answerJson = Encoding.UTF8.GetString(buffer, 0, result.Count);
             var answer = System.Text.Json.JsonSerializer.Deserialize<RTCSessionDescriptionInit>(answerJson);
-            _pc.setRemoteDescription(answer); // Também síncrono
+            _pc.setRemoteDescription(answer);
             Debug.WriteLine("WebRTC: Resposta recebida e configurada");
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"Erro na inicialização do WebRTC: {ex.Message}");
             throw;
+        }
+    }
+
+    private async Task SendIceCandidateAsync(RTCIceCandidate candidate)
+    {
+        if (_ws != null && _ws.State == WebSocketState.Open)
+        {
+            var json = System.Text.Json.JsonSerializer.Serialize(candidate);
+            await _ws.SendAsync(Encoding.UTF8.GetBytes(json), WebSocketMessageType.Text, true, CancellationToken.None);
+            Debug.WriteLine($"WebRTC: Candidato ICE enviado: {json}");
+        }
+        else
+        {
+            Debug.WriteLine("WebRTC: WebSocket não está aberto para enviar candidato ICE");
         }
     }
 }
