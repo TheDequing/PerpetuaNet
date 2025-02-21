@@ -48,8 +48,5 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [C:/PerpetuaNet/Views/SettingsView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/PerpetuaNet/Views/SyncView.axaml]
-build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
-
 [C:/PerpetuaNet/Views/TorrentsView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

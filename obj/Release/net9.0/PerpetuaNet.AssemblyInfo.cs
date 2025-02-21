@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PerpetuaNet")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+72d2c2d38734719251876341597f23637f681500")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a44fecb87dbd76d792fdbe13adce7b98bcaa8ebc")]
 [assembly: System.Reflection.AssemblyProductAttribute("PerpetuaNet")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PerpetuaNet")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
