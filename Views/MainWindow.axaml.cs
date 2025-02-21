@@ -1,34 +1,12 @@
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using PerpetuaNet.Views;
+using Avalonia.Controls;
 
-namespace PerpetuaNet.ViewModels;
+namespace PerpetuaNet.Views;
 
-public partial class MainWindowViewModel : ObservableObject
+public partial class MainWindow : Window
 {
-    [ObservableProperty]
-    private object _currentView;
-
-    public MainWindowViewModel()
+    public MainWindow()
     {
-        CurrentView = new HomeView();
+        InitializeComponent();
+        DataContext = new PerpetuaNet.ViewModels.MainWindowViewModel();
     }
-
-    [RelayCommand]
-    private void ShowHome() => CurrentView = new HomeView();
-
-    [RelayCommand]
-    private void ShowCatalog() => CurrentView = new CatalogView();
-
-    [RelayCommand]
-    private void ShowDownloads() => CurrentView = new DownloadsView();
-
-    [RelayCommand]
-    private void ShowSettings() => CurrentView = new SettingsView();
-
-    [RelayCommand]
-    private void ShowLibrary() => CurrentView = new LibraryView();
-
-    [RelayCommand]
-    private void ShowLogin() => CurrentView = new LoginView();
 }

@@ -18,11 +18,17 @@ public partial class MainWindowViewModel : ObservableObject
     private void ShowHome() => CurrentView = new HomeView();
 
     [RelayCommand]
-    private void ShowTorrents() => CurrentView = new TorrentsView();
+    private void ShowCatalog() => CurrentView = new CatalogView();
 
     [RelayCommand]
-    private void ShowSync() => CurrentView = new SyncView();
+    private void ShowDownloads() => CurrentView = new DownloadsView();
 
     [RelayCommand]
     private void ShowSettings() => CurrentView = new SettingsView();
+
+    [RelayCommand]
+    private void ShowLibrary() => CurrentView = new LibraryView();
+
+    [RelayCommand]
+    private void ShowLogin() => CurrentView = new LoginView();
 }

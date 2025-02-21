@@ -6,6 +6,3 @@ C:\PerpetuaNet\obj\Debug\net9.0\PerpetuaNet.AssemblyInfoInputs.cache
 C:\PerpetuaNet\obj\Debug\net9.0\PerpetuaNet.AssemblyInfo.cs
 C:\PerpetuaNet\obj\Debug\net9.0\PerpetuaNet.csproj.CoreCompileInputs.cache
 C:\PerpetuaNet\obj\Debug\net9.0\PerpetuaNet.sourcelink.json
-C:\PerpetuaNet\obj\Debug\net9.0\PerpetuaNet.dll
-C:\PerpetuaNet\obj\Debug\net9.0\refint\PerpetuaNet.dll
-C:\PerpetuaNet\obj\Debug\net9.0\PerpetuaNet.pdb
