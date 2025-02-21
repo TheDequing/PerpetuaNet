@@ -15,16 +15,17 @@ public class WebRTCSyncService
 
     public async Task InitializeAndSync()
     {
-        Log("Iniciando sincronização WebRTC...");
+        Log("Aplicativo iniciado, preparando sincronização WebRTC...");
         try
         {
+            Log("Iniciando sincronização WebRTC...");
             Log("Configurando RTCConfiguration com STUN...");
             var config = new RTCConfiguration
             {
                 iceServers = new List<RTCIceServer>
-            {
-                new RTCIceServer { urls = "stun:stun.l.google.com:19302" }
-            }
+                {
+                    new RTCIceServer { urls = "stun:stun.l.google.com:19302" }
+                }
             };
 
             Log("Criando RTCPeerConnection...");
@@ -47,7 +48,7 @@ public class WebRTCSyncService
             _ws = new ClientWebSocket();
 
             Log("Conectando ao WebSocket wss://perpetuanetserver.onrender.com/ws...");
-            using (var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10))) // Timeout de 10 segundos
+            using (var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10)))
             {
                 try
                 {
@@ -74,7 +75,7 @@ public class WebRTCSyncService
             Log("Criando oferta...");
             var offer = _pc.createOffer();
             Log("Configurando descrição local...");
-            _pc.setLocalDescription(offer);
+            await _pc.setLocalDescription(offer);
             Log("WebRTC: Oferta criada e configurada localmente");
 
             var offerJson = System.Text.Json.JsonSerializer.Serialize(offer);
@@ -83,24 +84,34 @@ public class WebRTCSyncService
             Log("WebRTC: Oferta enviada ao servidor de sinalização");
 
             Log("Aguardando resposta do servidor...");
-            var buffer = new byte[1024];
-            var result = await _ws.ReceiveAsync(buffer, CancellationToken.None);
-            var answerJson = Encoding.UTF8.GetString(buffer, 0, result.Count);
-            Log($"WebRTC: Resposta recebida do servidor: {answerJson}");
-            if (string.IsNullOrEmpty(answerJson))
+            while (_ws.State == WebSocketState.Open)
             {
-                Log("Erro: Resposta do servidor é nula ou vazia");
-                return;
+                var buffer = new byte[1024];
+                var result = await _ws.ReceiveAsync(buffer, CancellationToken.None);
+                var answerJson = Encoding.UTF8.GetString(buffer, 0, result.Count);
+                Log($"WebRTC: Resposta recebida do servidor: {answerJson}");
+
+                // Filtrar apenas mensagens SDP válidas (com "type" e "sdp")
+                if (answerJson.Contains("\"type\":") && answerJson.Contains("\"sdp\":"))
+                {
+                    var answer = System.Text.Json.JsonSerializer.Deserialize<RTCSessionDescriptionInit>(answerJson);
+                    if (answer?.sdp != null)
+                    {
+                        Log("Configurando descrição remota...");
+                        await _pc.setRemoteDescription(answer);
+                        Log("WebRTC: Resposta recebida e configurada");
+                        break; // Sai do loop após configurar a resposta válida
+                    }
+                    else
+                    {
+                        Log("Erro: Resposta inválida ou nula após desserialização");
+                    }
+                }
+                else
+                {
+                    Log("Mensagem ignorada: não é uma descrição SDP válida");
+                }
             }
-            var answer = System.Text.Json.JsonSerializer.Deserialize<RTCSessionDescriptionInit>(answerJson);
-            if (answer == null)
-            {
-                Log("Erro: Não foi possível desserializar a resposta");
-                return;
-            }
-            Log("Configurando descrição remota...");
-            _pc.setRemoteDescription(answer);
-            Log("WebRTC: Resposta recebida e configurada");
         }
         catch (Exception ex)
         {
