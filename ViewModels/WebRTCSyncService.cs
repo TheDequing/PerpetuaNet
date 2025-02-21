@@ -10,8 +10,8 @@ namespace PerpetuaNet;
 
 public class WebRTCSyncService
 {
-    private RTCPeerConnection _pc;
-    private ClientWebSocket _ws;
+    private RTCPeerConnection? _pc; // Tornar anulável
+    private ClientWebSocket? _ws;   // Tornar anulável
 
     public async Task InitializeAndSync()
     {
@@ -41,19 +41,17 @@ public class WebRTCSyncService
             };
 
             var offer = _pc.createOffer();
-            await _pc.setLocalDescription(offer);
+            _pc.setLocalDescription(offer); // Remover await, é síncrono
 
-            // Enviar oferta ao servidor de sinalização
             var offerJson = System.Text.Json.JsonSerializer.Serialize(offer);
             await _ws.SendAsync(Encoding.UTF8.GetBytes(offerJson), WebSocketMessageType.Text, true, CancellationToken.None);
             Debug.WriteLine("WebRTC: Oferta enviada ao servidor de sinalização");
 
-            // Receber resposta (simulação básica)
             var buffer = new byte[1024];
             var result = await _ws.ReceiveAsync(buffer, CancellationToken.None);
             var answerJson = Encoding.UTF8.GetString(buffer, 0, result.Count);
             var answer = System.Text.Json.JsonSerializer.Deserialize<RTCSessionDescriptionInit>(answerJson);
-            await _pc.setRemoteDescription(answer);
+            _pc.setRemoteDescription(answer); // Também síncrono
             Debug.WriteLine("WebRTC: Resposta recebida e configurada");
         }
         catch (Exception ex)

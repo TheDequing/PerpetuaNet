@@ -13,18 +13,16 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private bool _isAdminLoggedIn;
 
-    private readonly Timer _syncTimer;
+    private readonly System.Timers.Timer _syncTimer; // Especificar namespace
 
     public MainWindowViewModel()
     {
         CurrentView = new HomeView();
         IsAdminLoggedIn = false;
 
-        // Configura sincronização automática
         StartWebRTCSync();
 
-        // Timer para verificar sincronização a cada 1 hora (3600000 ms)
-        _syncTimer = new Timer(3600000);
+        _syncTimer = new System.Timers.Timer(3600000); // 1 hora em milissegundos
         _syncTimer.Elapsed += (s, e) => StartWebRTCSync();
         _syncTimer.AutoReset = true;
         _syncTimer.Start();
