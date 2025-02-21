@@ -1,8 +1,11 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl x:Class="PerpetuaNet.Views.SettingsView"
+             xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="PerpetuaNet.Views.SettingsView">
+             xmlns:vm="using:PerpetuaNet.ViewModels"
+             x:DataType="vm:SettingsViewModel">
     <StackPanel Margin="10">
         <TextBlock Text="Configurações" />
-        <TextBox Watermark="Caminho de download" />
+        <TextBox Text="{Binding DownloadPath}" Watermark="Caminho de download" />
+        <Button Content="Salvar" Command="{Binding SaveSettingsCommand}" Margin="0,5,0,0" />
     </StackPanel>
 </UserControl>

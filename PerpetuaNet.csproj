@@ -11,7 +11,7 @@
 		<PackageReference Include="Avalonia.Desktop" Version="11.2.1" />
 		<PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-		<PackageReference Include="WebRTCNET" Version="1.75.0.1-Alpha" />
 		<PackageReference Include="MonoTorrent" Version="2.0.7" />
+		<PackageReference Include="SIPSorcery" Version="6.0.11" />
 	</ItemGroup>
 </Project>
