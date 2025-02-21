@@ -75,7 +75,7 @@ public class WebRTCSyncService
             Log("Criando oferta...");
             var offer = _pc.createOffer();
             Log("Configurando descrição local...");
-            await _pc.setLocalDescription(offer);
+            await _pc.setLocalDescription(offer); // Este método ainda retorna Task
             Log("WebRTC: Oferta criada e configurada localmente");
 
             var offerJson = System.Text.Json.JsonSerializer.Serialize(offer);
@@ -98,9 +98,16 @@ public class WebRTCSyncService
                     if (answer?.sdp != null)
                     {
                         Log("Configurando descrição remota...");
-                        await _pc.setRemoteDescription(answer);
-                        Log("WebRTC: Resposta recebida e configurada");
-                        break; // Sai do loop após configurar a resposta válida
+                        var setResult = _pc.setRemoteDescription(answer); // Método síncrono, retorna SetDescriptionResultEnum
+                        if (setResult == SetDescriptionResultEnum.OK)
+                        {
+                            Log("WebRTC: Resposta recebida e configurada");
+                            break; // Sai do loop após configurar a resposta válida
+                        }
+                        else
+                        {
+                            Log($"Erro ao configurar descrição remota: {setResult}");
+                        }
                     }
                     else
                     {
