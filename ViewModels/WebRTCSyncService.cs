@@ -1,5 +1,4 @@
 using SIPSorcery.Net;
-using SIPSorcery.Sdp; // Adicionado para SDP.Parse
 using System.Diagnostics;
 using System.Net.WebSockets;
 using System.Text;
