@@ -109,7 +109,7 @@ public class WebRTCSyncService : IDisposable
                     {
                         remoteOffer = new RTCSessionDescriptionInit { type = RTCSdpType.offer, sdp = msg.Sdp };
                         Log.Information("Oferta remota recebida, configurando descrição remota...");
-                        _pc.setRemoteDescription(new RTCSessionDescription { type = RTCSdpType.offer, sdp = SDP.ParseSDP(msg.Sdp) });
+                        _pc.setRemoteDescription(new RTCSessionDescription { type = RTCSdpType.offer, sdp = SDP.Parse(msg.Sdp) });
                         Log.Information("WebRTC: Oferta remota configurada");
                         break;
                     }
@@ -163,7 +163,7 @@ public class WebRTCSyncService : IDisposable
                     if (msg?.Type == 2 && !string.IsNullOrEmpty(msg.Sdp))
                     {
                         Log.Information("Configurando descrição remota com resposta...");
-                        _pc.setRemoteDescription(new RTCSessionDescription { type = RTCSdpType.answer, sdp = SDP.ParseSDP(msg.Sdp) });
+                        _pc.setRemoteDescription(new RTCSessionDescription { type = RTCSdpType.answer, sdp = SDP.Parse(msg.Sdp) });
                         Log.Information("WebRTC: Resposta recebida e configurada");
                         break;
                     }
