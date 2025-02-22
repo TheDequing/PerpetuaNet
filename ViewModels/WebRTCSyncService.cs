@@ -51,7 +51,7 @@ public class WebRTCSyncService : IDisposable
             _pc = new RTCPeerConnection(config);
 
             Log.Information("Criando canal de dados...");
-            var channel = await _pc.createDataChannel("syncChannel");
+            var channel = _pc.createDataChannel("syncChannel", null);
 
             channel.onopen += () =>
             {
@@ -108,7 +108,7 @@ public class WebRTCSyncService : IDisposable
                     {
                         remoteOffer = new RTCSessionDescriptionInit { type = RTCSdpType.offer, sdp = msg.Sdp };
                         Log.Information("Oferta remota recebida, configurando descrição remota...");
-                        await _pc.SetRemoteDescription(remoteOffer);
+                        _pc.setRemoteDescription(new RTCSessionDescription { type = RTCSdpType.offer, sdp = msg.Sdp });
                         Log.Information("WebRTC: Oferta remota configurada");
                         break;
                     }
@@ -123,9 +123,9 @@ public class WebRTCSyncService : IDisposable
             {
                 // Se não recebeu oferta, cria e envia uma
                 Log.Information("Nenhuma oferta recebida, criando oferta local...");
-                var offer = await _pc.createOffer();
+                var offer = await _pc.createOffer(null);
                 Log.Information("Configurando descrição local...");
-                await _pc.SetLocalDescription(offer);
+                _pc.setLocalDescription(offer);
                 Log.Information("WebRTC: Oferta criada e configurada localmente");
 
                 var offerJson = JsonSerializer.Serialize(new SignalingMessage { Type = 1, Sdp = offer.sdp });
@@ -137,9 +137,9 @@ public class WebRTCSyncService : IDisposable
             {
                 // Se recebeu oferta, cria e envia uma resposta
                 Log.Information("Criando resposta para a oferta remota...");
-                var answer = await _pc.createAnswer();
+                var answer = await _pc.createAnswer(null);
                 Log.Information("Configurando descrição local com resposta...");
-                await _pc.SetLocalDescription(answer);
+                _pc.setLocalDescription(answer);
                 Log.Information("WebRTC: Resposta criada e configurada localmente");
 
                 var answerJson = JsonSerializer.Serialize(new SignalingMessage { Type = 2, Sdp = answer.sdp });
@@ -161,9 +161,8 @@ public class WebRTCSyncService : IDisposable
                     var msg = JsonSerializer.Deserialize<SignalingMessage>(answerJson);
                     if (msg?.Type == 2 && !string.IsNullOrEmpty(msg.Sdp))
                     {
-                        var answer = new RTCSessionDescriptionInit { type = RTCSdpType.answer, sdp = msg.Sdp };
                         Log.Information("Configurando descrição remota com resposta...");
-                        await _pc.SetRemoteDescription(answer);
+                        _pc.setRemoteDescription(new RTCSessionDescription { type = RTCSdpType.answer, sdp = msg.Sdp });
                         Log.Information("WebRTC: Resposta recebida e configurada");
                         break;
                     }
@@ -202,14 +201,14 @@ public class WebRTCSyncService : IDisposable
         {
             if (_ws != null && _ws.State == WebSocketState.Open)
             {
-                _ws.CloseAsync(WebSocketCloseStatus.NormalClosure, "Fechando", CancellationToken.None).GetAwaiter().GetResult();
+                _ws.CloseAsync(WebSocketCloseStatus.NormalClosure, "Fechando conexão", CancellationToken.None).GetAwaiter().GetResult();
                 Log.Information("WebSocket fechado");
             }
             _ws?.Dispose();
 
             if (_pc != null)
             {
-                _pc.Close();
+                _pc.Close("Serviço finalizado");
                 _pc.Dispose();
                 Log.Information("RTCPeerConnection fechado");
             }
