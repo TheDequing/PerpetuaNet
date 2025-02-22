@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "P5fgLZ4n+gw=",
+  "dgSpecHash": "eZogZSi9UBA=",
   "success": true,
   "projectFilePath": "C:\\PerpetuaNet\\PerpetuaNet.csproj",
   "expectedPackageFiles": [
@@ -49,6 +49,8 @@
     "C:\\Users\\rakjs\\.nuget\\packages\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\rakjs\\.nuget\\packages\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\rakjs\\.nuget\\packages\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
+    "C:\\Users\\rakjs\\.nuget\\packages\\serilog\\4.2.0\\serilog.4.2.0.nupkg.sha512",
+    "C:\\Users\\rakjs\\.nuget\\packages\\serilog.sinks.file\\6.0.0\\serilog.sinks.file.6.0.0.nupkg.sha512",
     "C:\\Users\\rakjs\\.nuget\\packages\\sipsorcery\\6.0.11\\sipsorcery.6.0.11.nupkg.sha512",
     "C:\\Users\\rakjs\\.nuget\\packages\\sipsorcery.websocketsharp\\0.0.1\\sipsorcery.websocketsharp.0.0.1.nupkg.sha512",
     "C:\\Users\\rakjs\\.nuget\\packages\\sipsorcerymedia.abstractions\\1.2.0\\sipsorcerymedia.abstractions.1.2.0.nupkg.sha512",
