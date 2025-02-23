@@ -1,0 +1,54 @@
+2025-02-22 22:52:44.093 -05:00 [INF] Aplicativo iniciado, preparando sincronização WebRTC...
+2025-02-22 22:52:44.096 -05:00 [INF] Iniciando sincronização WebRTC...
+2025-02-22 22:52:44.096 -05:00 [INF] Configurando RTCConfiguration com STUN...
+2025-02-22 22:52:44.096 -05:00 [INF] Criando RTCPeerConnection...
+2025-02-22 22:52:44.222 -05:00 [INF] Inicializando ClientWebSocket...
+2025-02-22 22:52:44.222 -05:00 [INF] Conectando ao WebSocket wss://perpetuanetserver.onrender.com/ws...
+2025-02-22 22:52:44.601 -05:00 [INF] WebRTC: Conectado ao WebSocket
+2025-02-22 22:52:44.601 -05:00 [INF] WebRTC: Candidato ICE enviado: {"IceServer":{"TurnTimeToExpiry":"0001-01-01T00:00:00"},"candidate":"4576 1 udp 1677730047 73.142.85.33 60220 typ srflx raddr 0.0.0.0 rport 0 generation 0","sdpMid":"0","sdpMLineIndex":0,"foundation":"4576","component":1,"priority":1677730047,"address":"73.142.85.33","protocol":0,"port":60220,"type":2,"tcpType":0,"relatedAddress":null,"relatedPort":0,"usernameFragment":"KXRR","DestinationEndPoint":null}
+2025-02-22 22:52:44.603 -05:00 [INF] WebRTC: Candidato ICE enviado: {"IceServer":null,"candidate":"2358 1 udp 2113937663 10.0.0.100 60220 typ host generation 0","sdpMid":null,"sdpMLineIndex":0,"foundation":"2358","component":1,"priority":2113937663,"address":"10.0.0.100","protocol":0,"port":60220,"type":0,"tcpType":0,"relatedAddress":null,"relatedPort":0,"usernameFragment":"KXRR","DestinationEndPoint":null}
+2025-02-22 22:52:44.603 -05:00 [INF] WebRTC: Candidato ICE enviado: {"IceServer":null,"candidate":"2714 1 udp 2113940223 2601:18e:c47f:32a0:6825:688:743f:5bfa 60220 typ host generation 0","sdpMid":null,"sdpMLineIndex":0,"foundation":"2714","component":1,"priority":2113940223,"address":"2601:18e:c47f:32a0:6825:688:743f:5bfa","protocol":0,"port":60220,"type":0,"tcpType":0,"relatedAddress":null,"relatedPort":0,"usernameFragment":"KXRR","DestinationEndPoint":null}
+2025-02-22 22:52:44.603 -05:00 [INF] WebRTC: Candidato ICE enviado: {"IceServer":null,"candidate":"1498 1 udp 2113940223 2601:18e:c47f:32a0:4cc5:e935:636e:9768 60220 typ host generation 0","sdpMid":null,"sdpMLineIndex":0,"foundation":"1498","component":1,"priority":2113940223,"address":"2601:18e:c47f:32a0:4cc5:e935:636e:9768","protocol":0,"port":60220,"type":0,"tcpType":0,"relatedAddress":null,"relatedPort":0,"usernameFragment":"KXRR","DestinationEndPoint":null}
+2025-02-22 22:52:44.603 -05:00 [INF] WebRTC: Candidato ICE enviado: {"IceServer":null,"candidate":"2538 1 udp 2113940223 2601:18e:c47f:32a0:f1e0:1325:808e:a309 60220 typ host generation 0","sdpMid":null,"sdpMLineIndex":0,"foundation":"2538","component":1,"priority":2113940223,"address":"2601:18e:c47f:32a0:f1e0:1325:808e:a309","protocol":0,"port":60220,"type":0,"tcpType":0,"relatedAddress":null,"relatedPort":0,"usernameFragment":"KXRR","DestinationEndPoint":null}
+2025-02-22 22:52:44.603 -05:00 [INF] WebRTC: Candidato ICE enviado: {"IceServer":null,"candidate":"2209 1 udp 2113940223 2601:18e:c47f:32a0::5e46 60220 typ host generation 0","sdpMid":null,"sdpMLineIndex":0,"foundation":"2209","component":1,"priority":2113940223,"address":"2601:18e:c47f:32a0::5e46","protocol":0,"port":60220,"type":0,"tcpType":0,"relatedAddress":null,"relatedPort":0,"usernameFragment":"KXRR","DestinationEndPoint":null}
+2025-02-22 22:52:44.603 -05:00 [INF] Verificando se há oferta remota...
+2025-02-22 22:52:52.254 -05:00 [INF] Aplicativo iniciado, preparando sincronização WebRTC...
+2025-02-22 22:52:52.269 -05:00 [INF] Iniciando sincronização WebRTC...
+2025-02-22 22:52:52.269 -05:00 [INF] Configurando RTCConfiguration com STUN...
+2025-02-22 22:52:52.269 -05:00 [INF] Criando RTCPeerConnection...
+2025-02-22 22:52:53.082 -05:00 [INF] Inicializando ClientWebSocket...
+2025-02-22 22:52:53.083 -05:00 [INF] Conectando ao WebSocket wss://perpetuanetserver.onrender.com/ws...
+2025-02-22 22:52:53.631 -05:00 [INF] WebRTC: Conectado ao WebSocket
+2025-02-22 22:52:53.669 -05:00 [INF] WebRTC: Candidato ICE enviado: {"IceServer":{"TurnTimeToExpiry":"0001-01-01T00:00:00"},"candidate":"4576 1 udp 1677730047 73.142.85.33 53725 typ srflx raddr 0.0.0.0 rport 0 generation 0","sdpMid":"0","sdpMLineIndex":0,"foundation":"4576","component":1,"priority":1677730047,"address":"73.142.85.33","protocol":0,"port":53725,"type":2,"tcpType":0,"relatedAddress":null,"relatedPort":0,"usernameFragment":"ORMM","DestinationEndPoint":null}
+2025-02-22 22:52:53.670 -05:00 [INF] WebRTC: Candidato ICE enviado: {"IceServer":null,"candidate":"2358 1 udp 2113937663 10.0.0.100 53725 typ host generation 0","sdpMid":null,"sdpMLineIndex":0,"foundation":"2358","component":1,"priority":2113937663,"address":"10.0.0.100","protocol":0,"port":53725,"type":0,"tcpType":0,"relatedAddress":null,"relatedPort":0,"usernameFragment":"ORMM","DestinationEndPoint":null}
+2025-02-22 22:52:53.670 -05:00 [INF] WebRTC: Candidato ICE enviado: {"IceServer":null,"candidate":"2714 1 udp 2113940223 2601:18e:c47f:32a0:6825:688:743f:5bfa 53725 typ host generation 0","sdpMid":null,"sdpMLineIndex":0,"foundation":"2714","component":1,"priority":2113940223,"address":"2601:18e:c47f:32a0:6825:688:743f:5bfa","protocol":0,"port":53725,"type":0,"tcpType":0,"relatedAddress":null,"relatedPort":0,"usernameFragment":"ORMM","DestinationEndPoint":null}
+2025-02-22 22:52:53.670 -05:00 [INF] WebRTC: Candidato ICE enviado: {"IceServer":null,"candidate":"1498 1 udp 2113940223 2601:18e:c47f:32a0:4cc5:e935:636e:9768 53725 typ host generation 0","sdpMid":null,"sdpMLineIndex":0,"foundation":"1498","component":1,"priority":2113940223,"address":"2601:18e:c47f:32a0:4cc5:e935:636e:9768","protocol":0,"port":53725,"type":0,"tcpType":0,"relatedAddress":null,"relatedPort":0,"usernameFragment":"ORMM","DestinationEndPoint":null}
+2025-02-22 22:52:53.670 -05:00 [INF] WebRTC: Candidato ICE enviado: {"IceServer":null,"candidate":"2538 1 udp 2113940223 2601:18e:c47f:32a0:f1e0:1325:808e:a309 53725 typ host generation 0","sdpMid":null,"sdpMLineIndex":0,"foundation":"2538","component":1,"priority":2113940223,"address":"2601:18e:c47f:32a0:f1e0:1325:808e:a309","protocol":0,"port":53725,"type":0,"tcpType":0,"relatedAddress":null,"relatedPort":0,"usernameFragment":"ORMM","DestinationEndPoint":null}
+2025-02-22 22:52:53.670 -05:00 [INF] WebRTC: Candidato ICE enviado: {"IceServer":null,"candidate":"2209 1 udp 2113940223 2601:18e:c47f:32a0::5e46 53725 typ host generation 0","sdpMid":null,"sdpMLineIndex":0,"foundation":"2209","component":1,"priority":2113940223,"address":"2601:18e:c47f:32a0::5e46","protocol":0,"port":53725,"type":0,"tcpType":0,"relatedAddress":null,"relatedPort":0,"usernameFragment":"ORMM","DestinationEndPoint":null}
+2025-02-22 22:52:53.670 -05:00 [INF] Verificando se há oferta remota...
+2025-02-22 22:53:23.688 -05:00 [ERR] Erro na inicialização do WebRTC: The operation was canceled.
+System.Threading.Tasks.TaskCanceledException: The operation was canceled.
+ ---> System.IO.IOException: Unable to read data from the transport connection: A operação de E/S foi anulada devido a uma saída de thread ou a uma requisição de aplicativo..
+ ---> System.Net.Sockets.SocketException (995): A operação de E/S foi anulada devido a uma saída de thread ou a uma requisição de aplicativo.
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+   at System.Net.Security.SslStream.EnsureFullTlsFrameAsync[TIOAdapter](CancellationToken cancellationToken, Int32 estimatedSize)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](Memory`1 buffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.Http.HttpConnection.ReadBufferedAsyncCore(Memory`1 destination)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.Http.HttpConnection.RawConnectionStream.ReadAsync(Memory`1 buffer, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.RawConnectionStream.ReadAsync(Memory`1 buffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.IO.Stream.ReadAtLeastAsyncCore(Memory`1 buffer, Int32 minimumBytes, Boolean throwOnEndOfStream, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.WebSockets.ManagedWebSocket.EnsureBufferContainsAsync(Int32 minimumRequiredBytes, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask`1.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at PerpetuaNet.WebRTCSyncService.InitializeAndSync() in C:\PerpetuaNet\ViewModels\WebRTCSyncService.cs:line 101
